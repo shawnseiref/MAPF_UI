@@ -1,4 +1,6 @@
 package backend.MapGenerators;
 
-public abstract class AMapGenerator {
+public abstract class AMapGenerator implements IMapGenerator{
+
+
 }
