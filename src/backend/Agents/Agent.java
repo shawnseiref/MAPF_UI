@@ -13,6 +13,6 @@ public class Agent {
         this.location = location;
         this.goalLocation = goalLocation;
         path=new AgentSolution();
-        //add start location to solution
+        path.add(location);
     }
 }

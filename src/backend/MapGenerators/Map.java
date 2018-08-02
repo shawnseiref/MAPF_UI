@@ -1,12 +1,15 @@
 package backend.MapGenerators;
 
 public class Map {
+
     private char [][] map;
-    int height;
-    int width;
+    private int height;
+    private int width;
 
     public Map(char[][] map) {
         this.map = map;
+        height=map.length;
+        width=map[0].length;
     }
 
     public char[][] getGrid() {
@@ -24,4 +27,21 @@ public class Map {
     public boolean posExists(int x, int y){
         return map!=null && map[0]!=null && x>=0 && x<map.length && y>=0 && y<map[0].length;
     }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
 }

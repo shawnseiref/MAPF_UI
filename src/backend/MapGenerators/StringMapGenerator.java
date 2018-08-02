@@ -1,32 +1,20 @@
 package backend.MapGenerators;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class StrutMapGenerator extends AMapGenerator{
-
-    private String getMapAsString() throws IOException {
-        Scanner in = new Scanner(new FileReader("src/backend/Agents/brc000d.map"));
-        StringBuilder sb = new StringBuilder();
-        while(in.hasNext()) {
-            sb.append(in.next());
-        }
-        in.close();
-        return sb.toString();
-    }
-
-
+public class StringMapGenerator extends AMapGenerator{
     @Override
-    public Map generate(Object o) {
+    public  Map generate(Object o) {
         int rowsNum=0;
         int colNum=0;
         String mapStr="";
-        String tmp="";
-        try {
-            mapStr = this.getMapAsString();
-        } catch (Exception e){
-        }
+        if(o instanceof String )
+            mapStr=((String )o);
+        else
+            return null;
         int counter=0;
         counter=skipToNum(mapStr,counter);
         while(Character.isDigit(mapStr.charAt(counter))){

@@ -1,5 +1,7 @@
 package backend.Solvers;
 
-public class Solution {
+import java.util.ArrayList;
 
+public class Solution {
+    //private ArrayList agentsSolutions;
 }
