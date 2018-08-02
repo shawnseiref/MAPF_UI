@@ -1,4 +1,4 @@
-package backend.GridGenerators;
+package backend.MapGenerators;
 
 public class Position {
     private int x;
