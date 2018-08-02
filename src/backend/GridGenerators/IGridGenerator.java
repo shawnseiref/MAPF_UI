@@ -1,5 +1,5 @@
 package backend.GridGenerators;
 
 public interface IGridGenerator {
-    public void generate();
+    Grid generate(Object o);
 }
