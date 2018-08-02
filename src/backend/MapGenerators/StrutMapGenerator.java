@@ -19,11 +19,40 @@ public class StrutMapGenerator extends AMapGenerator{
 
     @Override
     public Map generate(Object o) {
+        int rowsNum=0;
+        int colNum=0;
+        String mapStr="";
+        String tmp="";
         try {
-            String mapStr = this.getMapAsString();
+            mapStr = this.getMapAsString();
         } catch (Exception e){
-
         }
-        return null;
+        int counter=0;
+        counter=skipToNum(mapStr,counter);
+        while(Character.isDigit(mapStr.charAt(counter))){
+            rowsNum = rowsNum * 10 + mapStr.charAt(counter);
+            counter++;
+        }
+        counter=skipToNum(mapStr,counter);
+        while(Character.isDigit(mapStr.charAt(counter))){
+            colNum=colNum*10+mapStr.charAt(counter);
+            counter++;
+        }
+        counter=counter+3;
+        char[][] map=new char[rowsNum][colNum];
+        for(int rows=0;rows<rowsNum;rows++) {
+            for (int cols = 0; cols < colNum; cols++) {
+                map[rows][cols]=mapStr.charAt(counter);
+                counter++;
+            }
+        }
+        return new Map(map);
+    }
+
+    private int skipToNum(String mapStr, int counter) {
+        while(!Character.isDigit(mapStr.charAt(counter))){
+            counter++;
+        }
+        return counter;
     }
 }
