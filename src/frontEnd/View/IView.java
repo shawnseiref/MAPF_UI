@@ -1,4 +1,4 @@
 package frontEnd.View;
 
-public class View {
+public interface IView {
 }
