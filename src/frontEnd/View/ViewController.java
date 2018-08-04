@@ -1,4 +1,11 @@
 package frontEnd.View;
 
-public class ViewController implements IView{
+import frontEnd.ViewModel.ViewModel;
+import javafx.fxml.FXML;
+
+public class ViewController implements IView {
+
+    @FXML
+    private ViewModel viewModel;
+    public SubScenarioDisplayer subScenarioDisplayer;
 }

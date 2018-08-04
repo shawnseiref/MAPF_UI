@@ -1,4 +1,7 @@
 package frontEnd.View;
 
-public class SubScenarioDisplayer {
+import javafx.scene.canvas.Canvas;
+
+public class SubScenarioDisplayer extends Canvas {
+
 }
