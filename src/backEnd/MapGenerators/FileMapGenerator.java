@@ -1,4 +1,4 @@
-package backend.MapGenerators;
+package backEnd.MapGenerators;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package backend.Solvers;
+package backEnd.Solvers;
 
 public class GridState {
 }

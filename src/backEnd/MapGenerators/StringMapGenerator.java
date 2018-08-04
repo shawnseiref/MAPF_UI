@@ -1,9 +1,4 @@
-package backend.MapGenerators;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
+package backEnd.MapGenerators;
 
 public class StringMapGenerator extends AMapGenerator{
     @Override

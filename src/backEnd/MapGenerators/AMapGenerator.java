@@ -1,4 +1,4 @@
-package backend.MapGenerators;
+package backEnd.MapGenerators;
 
 public abstract class AMapGenerator implements IMapGenerator {
     @Override
