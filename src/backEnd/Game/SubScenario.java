@@ -60,4 +60,9 @@ public class SubScenario {
     public void removeAgent(Agent agent){
         agents.remove(agent.getLocation());
     }
+
+    public void moveAgent(Position current, Position target){
+        agents.put(target,agents.get(current));
+        agents.remove(current);
+    }
 }

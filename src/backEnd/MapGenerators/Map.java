@@ -27,6 +27,13 @@ public class Map {
     public boolean posExists(int x, int y){
         return map!=null && map[0]!=null && x>=0 && x<map.length && y>=0 && y<map[0].length;
     }
+    public boolean posReachable(Position position){
+        return posReachable(position.getX(),position.getY());
+    }
+
+    public  boolean posReachable(int x, int y){
+        return (posExists(x,y) && (map[x][y]=='.' || map[x][y]=='G'));//check not wall settings
+    }
 
     public int getHeight() {
         return height;
