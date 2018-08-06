@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -19,7 +20,6 @@
 
 <!--<?import frontEnd.View.SubScenDisplayer?>-->
 
-<?import javafx.scene.canvas.Canvas?>
 <BorderPane fx:id="pane" style="-fx-background-color: bisque;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontEnd.View.ViewController">
 
     <top>
@@ -48,16 +48,17 @@
             <children>
                 <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="285.0" text="New Map">
                     <items>
-                        <Menu mnemonicParsing="false" text="Existing maps">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Map1" />
-                                <MenuItem mnemonicParsing="false" text="Map2" />
-                                <MenuItem mnemonicParsing="false" text="Map3" />
-                                <MenuItem mnemonicParsing="false" text="Map4" />
-                                <MenuItem mnemonicParsing="false" text="Map5" />
-                            </items>
-                        </Menu>
-                        <MenuItem mnemonicParsing="false" text="Load map" />
+                  <MenuItem mnemonicParsing="false" text="Existing maps" />
+                        <!--<Menu mnemonicParsing="false" text="Existing maps">-->
+                            <!--<items>-->
+                                <!--<MenuItem mnemonicParsing="false" text="Map1" />-->
+                                <!--<MenuItem mnemonicParsing="false" text="Map2" />-->
+                                <!--<MenuItem mnemonicParsing="false" text="Map3" />-->
+                                <!--<MenuItem mnemonicParsing="false" text="Map4" />-->
+                                <!--<MenuItem mnemonicParsing="false" text="Map5" />-->
+                            <!--</items>-->
+                        <!--</Menu>-->
+                        <MenuItem mnemonicParsing="false" onAction="#load" text="Load map" />
                         <MenuItem mnemonicParsing="false" text="Random map" />
                     </items>
                 </MenuButton>

@@ -10,7 +10,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
+import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -23,12 +25,12 @@ public class ViewController implements Observer,IView, Initializable {
     @FXML
     private ViewModel viewModel;
     @FXML
-    public Canvas subSceneDisplayer;
-    public TextField startRow;
-    public TextField startCol;
-    public TextField goalRow;
-    public TextField goalCol;
-    public Button createAgent;
+    public javafx.scene.canvas.Canvas subSceneDisplayer;
+    public javafx.scene.control.TextField startRow;
+    public javafx.scene.control.TextField startCol;
+    public javafx.scene.control.TextField goalRow;
+    public javafx.scene.control.TextField goalCol;
+    public javafx.scene.control.Button createAgent;
     public javafx.scene.image.ImageView backward;
     public javafx.scene.image.ImageView pause;
     public javafx.scene.image.ImageView play;
@@ -73,6 +75,22 @@ public class ViewController implements Observer,IView, Initializable {
         catch (Exception e){
             showAlert("Agent's position must be a reachable location in the map");
         }
+    }
+
+    public void load(ActionEvent event){
+        File file=loadFile();
+        if(file==null)
+            return;
+        String path = file.getAbsolutePath();
+        viewModel.loadMap(new File(path));
+        event.consume();
+    }
+
+    private File loadFile() {
+        JFileChooser fileChooser = new JFileChooser("SavedMaps");
+        if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+            return fileChooser.getSelectedFile();
+        return null;
     }
 
     private void showAlert(String alertMessage) {

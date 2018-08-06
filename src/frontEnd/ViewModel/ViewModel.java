@@ -3,6 +3,8 @@ package frontEnd.ViewModel;
 import backEnd.MapGenerators.Map;
 import backEnd.MapGenerators.Position;
 import frontEnd.Model.*;
+
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -43,5 +45,8 @@ public class ViewModel  extends Observable implements Observer {
 
     public void addAgent(Position start, Position goal) {
         model.addAgent(start,goal);
+    }
+
+    public void loadMap(File file) {
     }
 }
