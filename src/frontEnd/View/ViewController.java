@@ -76,18 +76,33 @@ public class ViewController implements Observer,IView, Initializable {
             showAlert("Agent's position must be a reachable location in the map");
         }
     }
+    public void loadNew(ActionEvent event){
+        File file=loadFile(true);
+        load(file);
+        event.consume();
+    }
 
-    public void load(ActionEvent event){
-        File file=loadFile();
+    public void loadExist(ActionEvent event){
+        File file=loadFile(false);
+        load(file);
+        event.consume();
+    }
+
+    public void load(File file){
         if(file==null)
             return;
         String path = file.getAbsolutePath();
         viewModel.loadMap(new File(path));
-        event.consume();
     }
 
-    private File loadFile() {
-        JFileChooser fileChooser = new JFileChooser("SavedMaps");
+    private File loadFile(boolean isNew) {
+        JFileChooser fileChooser;
+        if(isNew){
+            String userDir = System.getProperty("user.home");
+            fileChooser = new JFileChooser(userDir +"/Desktop");
+        }
+        else
+            fileChooser = new JFileChooser("SavedMaps");
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
             return fileChooser.getSelectedFile();
         return null;

@@ -22,20 +22,8 @@ public class ViewModel  extends Observable implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if (o == model) {
-            if (o == model) {
-                if (arg.equals("mapGenerator") || arg.equals("movement")) {
-                    setChanged();
-                    notifyObservers("mapGenerator");
-                }
-                if (arg.equals("movement and endGame")) {
-                    setChanged();
-                    notifyObservers("movement and endGame");
-                }
-                if (arg.equals("solution")) {
-                    setChanged();
-                    notifyObservers("solution");
-                }
-            }
+            setChanged();
+            notifyObservers();
         }
     }
 
@@ -48,5 +36,6 @@ public class ViewModel  extends Observable implements Observer {
     }
 
     public void loadMap(File file) {
+        model.generateMaze(file);
     }
 }

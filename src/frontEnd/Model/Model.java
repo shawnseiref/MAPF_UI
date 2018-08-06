@@ -43,15 +43,20 @@ public class Model extends Observable implements IModel  {
         StringMapGenerator gen=new StringMapGenerator();
         game=new SubScenario(gen.generate(str));
         currentSolState=0;
+        setChanged();
+        notifyObservers();
     }
 
     @Override
     public void moveCharacter(Position current, Position target) {
         game.moveAgent(current,target);
+        setChanged();
+        notifyObservers();
     }
 
     @Override
     public void addAgent(Position start, Position goal) {
         game.addAgent(new Agent(game.getNextAgentID(),start,goal));
     }
+
 }
