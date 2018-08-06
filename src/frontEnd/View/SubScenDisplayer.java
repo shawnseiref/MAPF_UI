@@ -5,7 +5,6 @@ import javafx.scene.canvas.Canvas;
 
 public class SubScenDisplayer extends Canvas {
 
-
     private Map map;
 
 
