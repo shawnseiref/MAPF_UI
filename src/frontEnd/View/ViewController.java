@@ -23,12 +23,12 @@ public class ViewController implements Observer,IView, Initializable {
     @FXML
     private ViewModel viewModel;
     @FXML
-    public javafx.scene.canvas.Canvas subSceneDisplayer;
-    public javafx.scene.control.TextField startRow;
-    public javafx.scene.control.TextField startCol;
-    public javafx.scene.control.TextField goalRow;
-    public javafx.scene.control.TextField goalCol;
-    public javafx.scene.control.Button createAgent;
+    public Canvas subSceneDisplayer;
+    public TextField startRow;
+    public TextField startCol;
+    public TextField goalRow;
+    public TextField goalCol;
+    public Button createAgent;
     public javafx.scene.image.ImageView backward;
     public javafx.scene.image.ImageView pause;
     public javafx.scene.image.ImageView play;
