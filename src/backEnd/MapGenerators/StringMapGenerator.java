@@ -14,12 +14,12 @@ public class StringMapGenerator extends AMapGenerator{
         int counter=0;
         counter=skipToNum(mapStr,counter);
         while(Character.isDigit(mapStr.charAt(counter))){
-            rowsNum = rowsNum * 10 + mapStr.charAt(counter);
+            rowsNum = rowsNum * 10 + Character.getNumericValue(mapStr.charAt(counter));
             counter++;
         }
         counter=skipToNum(mapStr,counter);
         while(Character.isDigit(mapStr.charAt(counter))){
-            colNum=colNum*10+mapStr.charAt(counter);
+            colNum=colNum*10+Character.getNumericValue(mapStr.charAt(counter));
             counter++;
         }
         counter=counter+3;

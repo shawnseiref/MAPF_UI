@@ -65,13 +65,13 @@ public class SubScenario {
             i++;
             int x=0;
             while(game.charAt(i)!=','){
-                x = x * 10 + game.charAt(i);
+                x = x * 10 + Character.getNumericValue(game.charAt(i));
                 i++;
             }
             i++;
             int y=0;
             while(game.charAt(i)!=')'){
-                y = y * 10 + game.charAt(i);
+                y = y * 10 + Character.getNumericValue(game.charAt(i));
                 i++;
             }
             nextPos=new Position(x,y);
