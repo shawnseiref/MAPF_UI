@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class AgentSolution {
     private Agent agent;
-    private ArrayList path;
+    private ArrayList<Position> path;
 
     public AgentSolution() {
         path=new ArrayList();
@@ -24,7 +24,11 @@ public class AgentSolution {
         path.remove(pos);
     }
 
-    public ArrayList getPath() {return path;}
+    public ArrayList<Position> getPath() {return path;}
+
+    public Agent getAgent() {
+        return agent;
+    }
 
     public void printPath(){
         for (Object a:path ) {

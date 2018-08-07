@@ -1,6 +1,7 @@
 package frontEnd.View;
 
 import backEnd.Game.SubScenario;
+import backEnd.MapGenerators.Position;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -59,6 +60,7 @@ public class SubScenDisplayer extends Canvas {
             double cellWidth = canvasWidth / game.getMap().getGrid().length;
             try {
                 Image treeImage=null;
+                Image characterImageWay = null;
                 Image characterImage = null;
                 Image outOfBounds=null;
                 Image goal=null;
@@ -67,7 +69,6 @@ public class SubScenDisplayer extends Canvas {
                 outOfBounds = new Image(this.getClass().getResourceAsStream("/Images/void.jpg"));
                 GraphicsContext gc = getGraphicsContext2D();
                 gc.clearRect(0, 0, getWidth(), getHeight());
-
                 //Draw game.getMap().getGrid()
                 for (int i = 0; i < game.getMap().getGrid().length; i++) {
                     for (int j = 0; j < game.getMap().getGrid()[i].length; j++) {
@@ -79,7 +80,15 @@ public class SubScenDisplayer extends Canvas {
                         }
                     }
                 }
-
+                for (int t=0;t<game.getSol().getAgentsSolutions().size();t++){
+                    ArrayList<Position> path=game.getSol().getAgentsSolutions().get(t).getPath();
+                    //characterImage=something;
+                    int k=0;
+                    for(k=0;k<currentState;k++){
+                        gc.drawImage(characterImageWay, path.get(k).getX() * cellWidth,path.get(k).getY() * cellHeight , cellWidth, cellHeight);
+                    }
+                    gc.drawImage(characterImage, path.get(k).getX() * cellWidth,path.get(k).getY() * cellHeight , cellWidth, cellHeight);
+                }
             }
             catch (Exception e) {
                 e.printStackTrace();

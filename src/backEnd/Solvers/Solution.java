@@ -20,6 +20,9 @@ public class Solution {
         solLength=0;
     }
 
+    public ArrayList<AgentSolution> getAgentsSolutions() {
+        return agentsSolutions;
+    }
 
     public Solution(ArrayList<AgentSolution> agentsSolutions) {
         this.agentsSolutions = agentsSolutions;
