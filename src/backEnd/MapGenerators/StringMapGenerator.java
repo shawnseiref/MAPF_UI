@@ -1,5 +1,6 @@
 package backEnd.MapGenerators;
 
+
 public class StringMapGenerator extends AMapGenerator{
     @Override
     public  Map generate(Object o) {

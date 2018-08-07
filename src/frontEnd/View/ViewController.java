@@ -5,6 +5,7 @@ import backEnd.MapGenerators.Position;
 import frontEnd.ViewModel.ViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
@@ -120,6 +121,5 @@ public class ViewController implements Observer,IView, Initializable {
         pause.setImage(new Image(this.getClass().getResourceAsStream("/Images/pause.png")));
         play.setImage(new Image(this.getClass().getResourceAsStream("/Images/play.png")));
         forward.setImage(new Image(this.getClass().getResourceAsStream("/Images/forward.png")));
-
     }
 }

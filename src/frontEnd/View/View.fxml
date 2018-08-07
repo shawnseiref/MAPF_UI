@@ -20,7 +20,10 @@
 
 <!--<?import frontEnd.View.SubScenDisplayer?>-->
 
-<BorderPane fx:id="pane" style="-fx-background-color: bisque;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontEnd.View.ViewController">
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane fx:id="pane" style="-fx-background-color: bisque;" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontEnd.View.ViewController">
 
     <top>
         <MenuBar BorderPane.alignment="CENTER">

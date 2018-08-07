@@ -22,4 +22,12 @@ public class AgentSolution {
     public void removePosition(Position pos){
         path.remove(pos);
     }
+
+    public ArrayList getPath() {return path;}
+
+    public void printPath(){
+        for (Object a:path ) {
+            System.out.print(a.toString()+",");
+        }
+    }
 }
