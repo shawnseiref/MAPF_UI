@@ -12,7 +12,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Solution {
-    private ArrayList agentsSolutions;
+    private int solLength;
+    private ArrayList<AgentSolution> agentsSolutions;
+
+    public Solution() {
+        agentsSolutions = new ArrayList();
+        solLength=0;
+    }
+
+
+    public Solution(ArrayList<AgentSolution> agentsSolutions) {
+        this.agentsSolutions = agentsSolutions;
+        solLength=0;
+        for(int i=0;i<agentsSolutions.size();i++)
+            if(agentsSolutions.get(i).getPath().size()>solLength)
+                solLength=agentsSolutions.get(i).getPath().size();
+    }
+
+    public int getSolLength() {
+        return solLength;
+    }
 
 //    public static void main(String[] args) {
 //        Solution sol = new Solution();
@@ -53,7 +72,7 @@ public class Solution {
         String[] strArr = solStr.split("\n");
         for (int i = 0; i < strArr.length; i++) {
             AgentSolution agentSolution = makeSingleAgentSoltion(strArr[i]);
-            agentsSolutions.add(agentSolution);
+            addSolution(agentSolution);
         }
         return agentsSolutions;
     }
@@ -94,16 +113,10 @@ public class Solution {
         return pos;
     }
 
-    public Solution() {
-        agentsSolutions = new ArrayList();
-    }
-
-    public Solution(ArrayList agentsSolutions) {
-        this.agentsSolutions = agentsSolutions;
-    }
-
     public void addSolution(AgentSolution sol) {
         agentsSolutions.add(sol);
+        if(sol.getPath().size()>solLength)
+            solLength=sol.getPath().size();
     }
 
     public void removeSolution(AgentSolution sol) {

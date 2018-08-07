@@ -1,7 +1,6 @@
 package frontEnd.View;
 
 import backEnd.Game.SubScenario;
-import backEnd.MapGenerators.Map;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -43,7 +42,7 @@ public class SubScenDisplayer extends Canvas {
         redraw();
     }
     public void nextState(){
-        if(currentState!=game.getSol())
+        if(currentState!=game.getSol().getSolLength())
             currentState++;
     }
 

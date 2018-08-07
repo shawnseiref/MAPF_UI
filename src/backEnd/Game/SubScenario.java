@@ -38,36 +38,53 @@ public class SubScenario {
         nextAgentID=agents.size();
     }
 
-    public SubScenario(Map map, File file) {
-        Scanner in = null;
-
-        try {
-            in = new Scanner(file);
-        } catch (FileNotFoundException var9) {
-            var9.printStackTrace();
-        }
-
-        StringBuilder sb = new StringBuilder();
-
-        while(in.hasNext()) {
-            sb.append(in.next());
-            sb.append('\n');
-        }
-
-        in.close();
-        String game = sb.toString();
-        int agentCounter = -1;
-
-        for(int i = 0; i < game.length(); ++i) {
-            if (game.charAt(i) == '\n' || i == 0) {
-                ++agentCounter;
-                new Agent(agentCounter);
-
-                while(game.charAt(i) != '(') {
-                    ++i;
-                }
+    public SubScenario(Map map,File file) {
+        this.map=map;
+        String game=fileToStr(file);
+        nextAgentID=0;
+        Agent newOne=new Agent(nextAgentID,null,null);
+        AgentSolution newOneSol=new AgentSolution();
+        agentsList.add(newOne);
+        Position nextPos=new Position();
+        for(int i=0;i<game.length();i++){
+            if(game.charAt(i)=='.'){
+                agentsList.get(nextAgentID).setGoalLocation(nextPos);
+                sol.addSolution(newOneSol);
+                nextAgentID++;
+                i++;
+                if(game.length()==i)
+                    break;
             }
+            if(game.charAt(i)=='\n'){
+                newOne=new Agent(nextAgentID,null,null);
+                agentsList.add(newOne);//check if it updates afterwards.
+                newOneSol=new AgentSolution();
+                while(game.charAt(i)!='(')
+                    i++;
+            }
+            i++;
+            int x=0;
+            while(game.charAt(i)!=','){
+                x = x * 10 + game.charAt(i);
+                i++;
+            }
+            i++;
+            int y=0;
+            while(game.charAt(i)!=')'){
+                y = y * 10 + game.charAt(i);
+                i++;
+            }
+            nextPos=new Position(x,y);
+            if(agentsList.get(nextAgentID).getLocation()==null){
+                agentsList.get(nextAgentID).setLocation(nextPos);//check if really changed
+                agents.put(agentsList.get(nextAgentID).getLocation(),newOne);
+            }
+            newOneSol.addPosition(nextPos);
         }
+    }
+
+    public Solution getSol() {
+        return sol;
     }
 
     public int getNextAgentID() {
