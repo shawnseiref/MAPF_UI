@@ -6,6 +6,21 @@ public class Agent {
     private int id;
     private Position location;
     private Position goalLocation;
+
+    public Agent(int id) {
+        this.id = id;
+        location=null;
+        goalLocation=null;
+    }
+
+    public Agent(int id, Position location, Position goalLocation) {
+        this.id = id;
+        this.location = location;
+        this.goalLocation = goalLocation;
+        path=new AgentSolution();
+        path.addPosition(location);
+    }
+
     private AgentSolution path;
 
     public int getId() {
@@ -40,11 +55,4 @@ public class Agent {
         this.path = path;
     }
 
-    public Agent(int id, Position location, Position goalLocation) {
-        this.id = id;
-        this.location = location;
-        this.goalLocation = goalLocation;
-        path=new AgentSolution();
-        path.addPosition(location);
-    }
 }

@@ -5,6 +5,7 @@ import backEnd.MapGenerators.Position;
 import java.util.ArrayList;
 
 public class AgentSolution {
+    private Agent agent;
     private ArrayList path;
 
     public AgentSolution() {
