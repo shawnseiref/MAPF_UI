@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 public class SubScenDisplayer extends Canvas {
 
     private SubScenario game;
+    private int currentState=0;
     private double xLO;
     private double yLO;
     private double wLO;
@@ -33,6 +34,15 @@ public class SubScenDisplayer extends Canvas {
         }
         start=true;
         redraw();
+    }
+    public void nextState(){
+        if(currentState!=game.getSol())
+            currentState++;
+    }
+
+    public void previousState(){
+        if(currentState!=0)
+            currentState--;
     }
 
     public void redraw() {
