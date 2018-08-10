@@ -10,7 +10,6 @@ import java.util.Observer;
 
 public class ViewModel  extends Observable implements Observer {
 
-
     private IModel model;
 
 
@@ -37,5 +36,9 @@ public class ViewModel  extends Observable implements Observer {
 
     public void loadMap(File file) {
         model.generateMaze(file);
+    }
+
+    public void loadMapSimulate(File file) {
+
     }
 }
