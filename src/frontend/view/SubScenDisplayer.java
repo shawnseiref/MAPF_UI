@@ -1,6 +1,7 @@
 package frontend.view;
 
 import backEnd.Game.SubScenario;
+import backEnd.MapGenerators.Map;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -17,8 +18,8 @@ public class SubScenDisplayer extends Canvas {
     private double syLO;
     private boolean start=false;
 
-    public void setGame(SubScenario ss) {
-        game=ss;
+    public void setGame(Map map) {
+        game = new SubScenario(map);
         if(!start){
             xLO=getLayoutX();
             yLO=getLayoutY();

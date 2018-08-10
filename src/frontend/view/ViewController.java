@@ -3,36 +3,45 @@ package frontend.view;
 import backEnd.MapGenerators.Map;
 import backEnd.MapGenerators.Position;
 import frontend.viewmodel.ViewModel;
+import frontend.view.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class ViewController implements Observer,IView, Initializable {
+
+public class ViewController implements Observer, IView, Initializable {
 
     @FXML
     public BorderPane root;
-    @FXML
+    public AnchorPane anchorPane;
     private ViewModel viewModel;
     @FXML
-    public SubScenDisplayer subSceneDisplayer;
-    public javafx.scene.control.ScrollPane scroll;
+    public SubScenDisplayer createDisplayer;
+    public SubScenDisplayer simulateDisplayer;
     public javafx.scene.control.MenuBar menu;
     public javafx.scene.layout.VBox VB;
     public javafx.scene.control.TabPane tab;
@@ -45,25 +54,8 @@ public class ViewController implements Observer,IView, Initializable {
     public javafx.scene.image.ImageView pause;
     public javafx.scene.image.ImageView play;
     public javafx.scene.image.ImageView forward;
+    public SubScenDisplayer subSceneDisplayer;
 
-
-    @Override
-    public void update(Observable o, Object arg) {
-        if (o == viewModel) {
-            displayGame(viewModel.getMap().getGrid());
-//            btn_generateMaze.setDisable(false);
-        }
-    }
-
-//    @Override
-    public void displayGame(char[][] map) {
-        //subScenDisplayer.setMaze(map);
-//        int characterPositionRow = viewModel.getCharacterPositionRow();
-//        int characterPositionColumn = viewModel.getCharacterPositionColumn();
-//        subScenDisplayer.setCharacterPosition(characterPositionRow, characterPositionColumn);
-//        this.characterPositionRow.set(characterPositionRow + "");
-//        this.characterPositionColumn.set(characterPositionColumn + "");
-    }
 
     public ViewModel getViewModel() {
         return viewModel;
@@ -71,6 +63,24 @@ public class ViewController implements Observer,IView, Initializable {
 
     public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o == viewModel) {
+            displayGame(viewModel.getMap());
+//            btn_generateMaze.setDisable(false);
+        }
+    }
+//    @Override
+
+    public void displayGame(Map m) {
+        subSceneDisplayer.setGame(m);
+//        int characterPositionRow = viewModel.getCharacterPositionRow();
+//        int characterPositionColumn = viewModel.getCharacterPositionColumn();
+//        subScenDisplayer.setCharacterPosition(characterPositionRow, characterPositionColumn);
+//        this.characterPositionRow.set(characterPositionRow + "");
+//        this.characterPositionColumn.set(characterPositionColumn + "");
     }
 
     public void addAgent(ActionEvent actionEvent){
@@ -86,58 +96,56 @@ public class ViewController implements Observer,IView, Initializable {
             showAlert("Agent's position must be a reachable location in the map");
         }
     }
+//    public void loadNew(ActionEvent event){
+//        File file=loadFile(true);
+//        load(file);
+//        event.consume();
+//    }
 
-    public void loadSol(ActionEvent event){
-        File file=loadFile("Created Files");
-        viewModel.loadSol(file);
-        event.consume();
-    }
+//    public void loadExist(ActionEvent event){
+//        File file=loadFile(false);
+//        load(file);
+//        event.consume();
+//    }
 
-    public void loadMap(ActionEvent event){
-        File file=loadFile("Created Files");
-        if (file != null) {
-            viewModel.loadMap(file);
-        }
-        event.consume();
-    }
-    public void loadNew(ActionEvent event){
-        String userDir = System.getProperty("user.home");
-        File file=loadFile(userDir+"/Desktop");
-        if (file != null) {
-            viewModel.loadMap(file);
-        }
-        event.consume();
-    }
+//    public void load(File file){
+//        if(file==null)
+//            return;
+//        String path = file.getAbsolutePath();
+//        viewModel.loadMap(new File(path));
+//    }
 
-    public void loadExist(ActionEvent event){
-        File file=loadFile("SavedMaps");
-        if (file != null) {
-            viewModel.loadMap(file);
-        }
-        event.consume();
-    }
-
-    private File loadFile(String location) {
+    public void loadGame(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.setTitle("Load Map");
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("map files", "*.map"));
-        fc.setInitialDirectory(new File(location));
+        fc.setInitialDirectory(new File("SavedMaps"));
         //showing the file chooser
-        return fc.showOpenDialog(null);
+        File file = fc.showOpenDialog(null);
+        // checking that a file was
+        // chosen by the user
+        if (file != null) {
+            viewModel.loadMap(file);
+        }
+    }
 
-//        JFileChooser fileChooser=null;
-//        if(location.equals("Desktop")){
+    public void load(File file){
+        String path = file.getAbsolutePath();
+        viewModel.loadMap(new File(path));
+    }
+
+//    private File loadFile(boolean isNew) {
+//        JFileChooser fileChooser;
+//        if(isNew){
 //            String userDir = System.getProperty("user.home");
-//            fileChooser = new JFileChooser(userDir + '/' + location);
+//            fileChooser = new JFileChooser(userDir +"/Desktop");
 //        }
-//        else if (location.equals("SavedMaps"))
+//        else
 //            fileChooser = new JFileChooser("SavedMaps");
-//        else if (location.equals("Created Files"))
-//            fileChooser = new JFileChooser("Created Files");
 //        if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
 //            return fileChooser.getSelectedFile();
 //        return null;
-    }
+//    }
 
     private void showAlert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -147,10 +155,10 @@ public class ViewController implements Observer,IView, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        backward.setImage(new Image(this.getClass().getResourceAsStream("/Images/backwards.png")));
-        pause.setImage(new Image(this.getClass().getResourceAsStream("/Images/pause.png")));
-        play.setImage(new Image(this.getClass().getResourceAsStream("/Images/play.png")));
-        forward.setImage(new Image(this.getClass().getResourceAsStream("/Images/forwards.png")));
+//        backward.setImage(new Image(this.getClass().getResourceAsStream("resources/Images/backwards.png")));
+        pause.setImage(new Image(this.getClass().getResourceAsStream("/resources/Images/pause.png")));
+        play.setImage(new Image(this.getClass().getResourceAsStream("/resources/Images/pause.png")));
+//        forward.setImage(new Image(this.getClass().getResourceAsStream("resources/Images/forwards.png")));
     }
 
     public void setResizeEvent(Scene scene) {
@@ -158,29 +166,37 @@ public class ViewController implements Observer,IView, Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
                 Scale newScale = new Scale();
-                if(newSceneWidth.doubleValue()>tab.widthProperty().doubleValue())
-                    scroll.setPrefWidth(newSceneWidth.doubleValue()-tab.widthProperty().doubleValue());
+                tab.setPrefWidth(newSceneWidth.doubleValue());
                 double old=oldSceneWidth.doubleValue()-VB.getWidth();
                 double neww=newSceneWidth.doubleValue()-VB.getWidth();
-                if(subSceneDisplayer!=null){
-                    newScale.setPivotX(subSceneDisplayer.getLayoutX() *(neww)/(old));
-                    newScale.setX( subSceneDisplayer.getScaleX() * (neww)/(old) );
-                    subSceneDisplayer.getTransforms().add(newScale);
+                if(createDisplayer!=null){
+                    newScale.setPivotX(createDisplayer.getLayoutX() *(neww)/(old));
+                    newScale.setX( createDisplayer.getScaleX() * (neww)/(old) );
+                    createDisplayer.getTransforms().add(newScale);
+                }
+                if(simulateDisplayer!=null){
+                    newScale.setX( simulateDisplayer.getScaleX() * (neww)/(old) );
+                    newScale.setPivotX(simulateDisplayer.getLayoutX() *(neww)/(old));
+                    simulateDisplayer.getTransforms().add(newScale);
                 }
             }
         });
         scene.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                if(newSceneHeight.doubleValue()>tab.heightProperty().doubleValue())
-                    scroll.setPrefHeight(newSceneHeight.doubleValue()-tab.heightProperty().doubleValue());
+                tab.setPrefHeight(newSceneHeight.doubleValue());
                 Scale newScale = new Scale();
                 double old=oldSceneHeight.doubleValue()-menu.getHeight();
                 double neww=newSceneHeight.doubleValue()-menu.getHeight();
-                if(subSceneDisplayer!=null){
-                    newScale.setPivotY(subSceneDisplayer.getLayoutY() *(neww)/(old));
-                    newScale.setY( subSceneDisplayer.getScaleY() * (neww)/(old) );
-                    subSceneDisplayer.getTransforms().add(newScale);
+                if(createDisplayer!=null){
+                    newScale.setPivotY(createDisplayer.getLayoutY() *(neww)/(old));
+                    newScale.setY( createDisplayer.getScaleY() * (neww)/(old) );
+                    createDisplayer.getTransforms().add(newScale);
+                }
+                if(simulateDisplayer!=null){
+                    newScale.setPivotY(simulateDisplayer.getLayoutY() *(neww)/(old));
+                    newScale.setY( simulateDisplayer.getScaleY() * (neww)/(old) );
+                    simulateDisplayer.getTransforms().add(newScale);
                 }
             }
         });
@@ -212,7 +228,7 @@ public class ViewController implements Observer,IView, Initializable {
                 if (deltaY < 0) {
                     zoomFactor = 1 / zoomFactor;
                 }
-                zoomOperator.zoom(scroll, zoomFactor, scrollEvent.getSceneX(), scrollEvent.getSceneY());
+                zoomOperator.zoom(anchorPane, zoomFactor, scrollEvent.getSceneX(), scrollEvent.getSceneY());
                 scrollEvent.consume();
             }
         } catch (NullPointerException e) {
