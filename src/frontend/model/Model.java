@@ -1,4 +1,4 @@
-package frontEnd.Model;
+package frontend.model;
 
 import backEnd.Agents.Agent;
 import backEnd.Game.SubScenario;
@@ -10,13 +10,13 @@ import backEnd.MapGenerators.StringMapGenerator;
 import java.io.File;
 import java.util.Observable;
 
-public class Model extends Observable implements IModel  {
-
+public class Model extends Observable implements IModel {
     private SubScenario game;
+
     private int currentSolState;
 
     @Override
-    public SubScenario getGame(){
+    public SubScenario getGame() {
         return game;
     }
 
@@ -28,35 +28,37 @@ public class Model extends Observable implements IModel  {
     @Override
     public void generateMaze(int width, int height, double percentage) {
         //stuff
-        currentSolState=0;
+        currentSolState = 0;
     }
 
     @Override
     public void generateMaze(File str) {
-        FileMapGenerator gen=new FileMapGenerator();
-        game=new SubScenario(gen.generate(str));
-        currentSolState=0;
-}
+        FileMapGenerator gen = new FileMapGenerator();
+        game = new SubScenario(gen.generate(str));
+        currentSolState = 0;
+        setChanged();
+        notifyObservers();
+    }
 
     @Override
     public void generateMaze(String str) {
-        StringMapGenerator gen=new StringMapGenerator();
-        game=new SubScenario(gen.generate(str));
-        currentSolState=0;
+        StringMapGenerator gen = new StringMapGenerator();
+        game = new SubScenario(gen.generate(str));
+        currentSolState = 0;
         setChanged();
         notifyObservers();
     }
 
     @Override
     public void moveCharacter(Position current, Position target) {
-        game.moveAgent(current,target);
+        game.moveAgent(current, target);
         setChanged();
         notifyObservers();
     }
 
     @Override
     public void addAgent(Position start, Position goal) {
-        game.addAgent(new Agent(game.getNextAgentID(),start,goal));
+        game.addAgent(new Agent(game.getNextAgentID(), start, goal));
     }
 
 }

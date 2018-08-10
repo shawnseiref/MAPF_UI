@@ -1,7 +1,7 @@
-package frontEnd.View;
+package frontend.view;
 
-import frontEnd.Model.*;
-import frontEnd.ViewModel.ViewModel;
+import frontend.model.*;
+import frontend.viewmodel.ViewModel;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -22,10 +22,10 @@ public class Main extends Application {
         ViewModel viewModel = new ViewModel(model);
         model.addObserver(viewModel);
         //--------------
-        primaryStage.setTitle("My Application!");
+        primaryStage.setTitle("Multi-Agent Path Find - User Interface");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(getClass().getResource("View.fxml").openStream());
-        Scene scene = new Scene(root, 700, 500);
+        Parent root = fxmlLoader.load(getClass().getResource("view.fxml").openStream());
+        Scene scene = new Scene(root, 800, 700);
 //        scene.getStylesheets().add(getClass().getResource("ViewStyle.css").toExternalForm());
         primaryStage.setScene(scene);
         //--------------
@@ -33,6 +33,7 @@ public class Main extends Application {
         view.setResizeEvent(scene);
         view.setViewModel(viewModel);
         viewModel.addObserver(view);
+        //        scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> view.KeyPressed(event));
 //        //--------------
         SetStageCloseEvent(primaryStage);
         primaryStage.show();

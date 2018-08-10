@@ -1,4 +1,4 @@
-package frontEnd.Model;
+package frontend.model;
 
 import backEnd.Game.SubScenario;
 import backEnd.MapGenerators.Map;

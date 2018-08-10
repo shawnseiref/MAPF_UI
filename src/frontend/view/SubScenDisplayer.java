@@ -1,21 +1,9 @@
-package frontEnd.View;
+package frontend.view;
 
 import backEnd.Game.SubScenario;
-import backEnd.MapGenerators.Position;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
-import java.net.URISyntaxException;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 public class SubScenDisplayer extends Canvas {
 
@@ -80,15 +68,15 @@ public class SubScenDisplayer extends Canvas {
                         }
                     }
                 }
-                for (int t=0;t<game.getSol().getAgentsSolutions().size();t++){
-                    ArrayList<Position> path=game.getSol().getAgentsSolutions().get(t).getPath();
-                    //characterImage=something;
-                    int k=0;
-                    for(k=0;k<currentState;k++){
-                        gc.drawImage(characterImageWay, path.get(k).getX() * cellWidth,path.get(k).getY() * cellHeight , cellWidth, cellHeight);
-                    }
-                    gc.drawImage(characterImage, path.get(k).getX() * cellWidth,path.get(k).getY() * cellHeight , cellWidth, cellHeight);
-                }
+//                for (int t=0;t<game.getSol().getAgentsSolutions().size();t++){
+//                    ArrayList<Position> path=game.getSol().getAgentsSolutions().get(t).getPath();
+//                    //characterImage=something;
+//                    int k=0;
+//                    for(k=0;k<currentState;k++){
+//                        gc.drawImage(characterImageWay, path.get(k).getX() * cellWidth,path.get(k).getY() * cellHeight , cellWidth, cellHeight);
+//                    }
+//                    gc.drawImage(characterImage, path.get(k).getX() * cellWidth,path.get(k).getY() * cellHeight , cellWidth, cellHeight);
+//                }
             }
             catch (Exception e) {
                 e.printStackTrace();

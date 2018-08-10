@@ -1,8 +1,8 @@
-package frontEnd.ViewModel;
+package frontend.viewmodel;
 
 import backEnd.MapGenerators.Map;
 import backEnd.MapGenerators.Position;
-import frontEnd.Model.*;
+import frontend.model.*;
 
 import java.io.File;
 import java.util.Observable;
@@ -40,5 +40,8 @@ public class ViewModel  extends Observable implements Observer {
 
     public void loadMapSimulate(File file) {
 
+    }
+
+    public void loadSol(File file) {
     }
 }
